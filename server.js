@@ -1,13 +1,16 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
+//use cors
+const cors = require('cors')
+app.use(cors())
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 const models = require('./models')
 
-models.sequelize.sync().then(function () {
+models.sequelize.sync({ force: true }).then(function () {
   console.log('database connected')
 })
 
